@@ -1,0 +1,168 @@
+# ============================================
+# Python
+# ============================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.pyd
+*.pyo
+*.egg
+*.egg-info/
+dist/
+build/
+
+# Virtual Environments
+venv/
+env/
+ENV/
+.venv
+backend/venv/
+backend/env/
+backend/.venv
+
+# ============================================
+# Node.js / Frontend
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+dist/
+dist-ssr/
+*.local
+
+# ============================================
+# Machine Learning Models (Large Files)
+# ============================================
+# Model files are large - teammates should train their own or download separately
+*.h5
+*.hdf5
+*.pb
+*.tflite
+*.onnx
+*.pkl
+*.joblib
+*.ckpt
+*.weights
+
+# Keep class mapping (small JSON file)
+# class_mapping.json  # Uncomment if you want to exclude this too
+
+# ============================================
+# Training Data (Too Large for Git)
+# ============================================
+# Training datasets are very large - use Git LFS or external storage
+train/
+val/
+data/
+datasets/
+*.jpg
+*.jpeg
+*.png
+*.JPG
+*.JPEG
+*.PNG
+# But allow small sample images if needed
+!sample_images/
+!examples/
+
+# ============================================
+# Environment Variables & Secrets
+# ============================================
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.cert
+*.crt
+secrets/
+credentials/
+config.ini
+settings.ini
+
+# ============================================
+# IDEs and Editors
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# ============================================
+# OS Files
+# ============================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ============================================
+# Logs and Temporary Files
+# ============================================
+*.log
+*.tmp
+*.temp
+*.cache
+logs/
+*.pid
+*.seed
+*.pid.lock
+
+# ============================================
+# Jupyter Notebooks
+# ============================================
+.ipynb_checkpoints/
+*.ipynb
+
+# ============================================
+# Testing and Coverage
+# ============================================
+.coverage
+.pytest_cache/
+.tox/
+htmlcov/
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+
+# ============================================
+# Database Files
+# ============================================
+*.db
+*.sqlite
+*.sqlite3
+
+# ============================================
+# Backup Files
+# ============================================
+*.bak
+*.backup
+*~
+
+# ============================================
+# Keep Important Files
+# ============================================
+# These files should be committed:
+# - requirements.txt
+# - README.md
+# - *.py (source code)
+# - *.jsx, *.js (frontend code)
+# - package.json
+# - Configuration templates

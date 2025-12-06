@@ -1,0 +1,53 @@
+# ============================================
+# Frontend Requirements for Agri ROBO Tomato
+# ============================================
+# This file documents the frontend dependencies
+# 
+# The frontend uses npm/Node.js for package management.
+# Install dependencies with: npm install
+#
+# This file is for documentation only. Actual dependencies
+# are managed in package.json
+
+# ============================================
+# Runtime Dependencies (Production)
+# ============================================
+# React 18.2.0+ - UI framework
+# react-dom 18.2.0+ - React DOM renderer
+# axios 1.6.0+ - HTTP client for API calls
+
+# ============================================
+# Development Dependencies
+# ============================================
+# vite 5.0.0+ - Build tool and dev server
+# @vitejs/plugin-react - Vite plugin for React
+# tailwindcss 3.3.5+ - Utility-first CSS framework
+# postcss 8.4.31+ - CSS post-processor
+# autoprefixer 10.4.16+ - PostCSS plugin for vendor prefixes
+# @types/react - TypeScript types for React
+# @types/react-dom - TypeScript types for React DOM
+
+# ============================================
+# Installation Instructions
+# ============================================
+# 1. Ensure Node.js 16+ is installed
+# 2. Navigate to frontend directory: cd frontend
+# 3. Install dependencies: npm install
+# 4. Start dev server: npm run dev
+# 5. Build for production: npm run build
+
+# ============================================
+# Node.js Version Requirements
+# ============================================
+# Minimum: Node.js 16.x
+# Recommended: Node.js 18.x or 20.x
+# Check version: node --version
+
+# ============================================
+# Notes:
+# ============================================
+# - Frontend runs on port 5173 by default (Vite)
+# - Backend API should run on port 8000
+# - Update API URL in components if backend port changes
+# - Production build creates static files in 'dist' folder
+
