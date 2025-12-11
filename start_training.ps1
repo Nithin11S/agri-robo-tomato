@@ -10,7 +10,7 @@ Set-Location $PSScriptRoot
 
 # Run training
 Write-Host "Launching training script..." -ForegroundColor Yellow
-python cnn_train_transfer_learning.py
+python cnn_train.py
 
 Write-Host ""
 Write-Host "Training completed or stopped." -ForegroundColor Green
