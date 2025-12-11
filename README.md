@@ -1,13 +1,102 @@
 # 🍅 Agri ROBO - Tomato Disease Detection System
 
-A modern web application for detecting tomato leaf diseases using AI, with robot control capabilities for Raspberry Pi deployment.
+A web application for detecting tomato leaf diseases using AI, with robot control capabilities for Raspberry Pi deployment.
 
 ## Features
 
-- 🔍 **Disease Detection**: Upload or capture images to detect tomato leaf diseases using TensorFlow/Keras
+- 🔍 **Disease Detection**: Upload or capture images to detect tomato leaf diseases
 - 🤖 **Robot Motor Control**: Control robot movement (Front, Back, Left, Right, Stop)
-- 💧 **Fertilizer Dispenser**: Control servo motor for fertilizer dispensing (Start/Stop)
+- 💧 **Fertilizer Dispenser**: Control servo motor for fertilizer dispensing
 - 📷 **Camera Integration**: Desktop camera support (ready for Pi Camera)
+
+## Prerequisites
+
+- **Python 3.8+** (3.10+ recommended)
+- **Node.js 16+** and npm
+- **Trained model files** (`tomato_disease_model.h5` and `class_mapping.json`)
+
+## Installation
+
+### Backend Setup
+
+1. **Create virtual environment:**
+   ```bash
+   python -m venv backend/venv
+   ```
+
+2. **Activate virtual environment:**
+   ```bash
+   # Windows
+   backend\venv\Scripts\Activate.ps1
+   
+   # Linux/Mac
+   source backend/venv/bin/activate
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
+   
+   **Note:** If you encounter NumPy installation issues on Python 3.13:
+   ```bash
+   pip install --only-binary :all: numpy
+   pip install -r requirements.txt
+   ```
+
+4. **Place model files in project root:**
+   - `tomato_disease_model.h5` (or `tomato_disease_model_best.h5`)
+   - `class_mapping.json`
+
+### Frontend Setup
+
+1. **Navigate to frontend directory:**
+   ```bash
+   cd frontend
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+## Running the Application
+
+### Start Backend Server
+
+```bash
+# Make sure virtual environment is activated
+cd backend
+python main.py
+```
+
+Backend runs on: `http://localhost:8000`  
+API docs: `http://localhost:8000/docs`
+
+### Start Frontend
+
+```bash
+cd frontend
+npm run dev
+```
+
+Frontend runs on: `http://localhost:5173`
+
+## Training the Model
+
+If you need to train your own model:
+
+```bash
+# Activate virtual environment first
+backend\venv\Scripts\Activate.ps1  # Windows
+# or
+source backend/venv/bin/activate  # Linux/Mac
+
+# Train model (takes 1-3 hours)
+python cnn_train_transfer_learning.py
+```
+
+**Note:** Training data (`train/` and `val/` folders) are not included in the repository due to size.
 
 ## Project Structure
 
@@ -15,185 +104,42 @@ A modern web application for detecting tomato leaf diseases using AI, with robot
 tomato/
 ├── backend/              # FastAPI backend
 │   ├── main.py          # API server
-│   └── requirements.txt # Python dependencies
-├── frontend/            # React frontend
-│   ├── src/
-│   │   ├── components/  # React components
-│   │   └── ...
+│   └── requirements.txt  # Python dependencies
+├── frontend/             # React frontend
+│   ├── src/             # Source code
 │   └── package.json     # Node dependencies
-├── app.py               # Original Streamlit app (reference)
-└── tomato_disease_model.h5  # Trained model
+├── requirements.txt     # Root requirements file
+├── cnn_train*.py        # Training scripts
+└── *.h5                 # Model files (not in git)
 ```
 
-## Setup Instructions
+## API Endpoints
 
-### Prerequisites
+- `GET /` - API status
+- `GET /health` - Health check
+- `POST /api/detect-disease` - Detect disease from image
+- `POST /api/motor/control?direction={direction}` - Control motors
+- `POST /api/servo/control?action={action}` - Control servo
 
-- Python 3.8+
-- Node.js 16+ and npm
-- TensorFlow model files (`tomato_disease_model.h5` and `class_mapping.json`)
+## Testing
 
-### Backend Setup
-
-1. Navigate to the backend directory:
-```bash
-cd backend
-```
-
-2. Create a virtual environment (recommended):
-```bash
-python -m venv venv
-# On Windows:
-venv\Scripts\activate
-# On Linux/Mac:
-source venv/bin/activate
-```
-
-3. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-4. Make sure the model files are in the parent directory:
-   - `tomato_disease_model.h5`
-   - `class_mapping.json`
-
-5. Start the FastAPI server:
-```bash
-python main.py
-# Or using uvicorn directly:
-uvicorn main:app --reload --host 0.0.0.0 --port 8000
-```
-
-The API will be available at `http://localhost:8000`
-API documentation: `http://localhost:8000/docs`
-
-### Frontend Setup
-
-1. Navigate to the frontend directory:
-```bash
-cd frontend
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Start the development server:
-```bash
-npm run dev
-```
-
-The frontend will be available at `http://localhost:3000`
-
-## Usage
-
-### Step 1: Ensure Model Files Exist
-
-Before starting, make sure you have the trained model files:
-- `tomato_disease_model.h5` or `tomato_disease_model_best.h5`
-- `class_mapping.json`
-
-If these files don't exist, train the model first:
-```bash
-python cnn_train.py
-```
-
-### Step 2: Test Model Connection (Optional)
-
-Test if the model loads correctly:
+**Test model loading:**
 ```bash
 cd backend
 python test_model.py
 ```
 
-This will verify:
-- Model file exists and can be loaded
-- Class mapping file exists and is valid
-- Model can make predictions
-
-### Step 3: Start the Application
-
-1. **Start Backend**: Run the FastAPI server (port 8000)
+**Test API with image:**
 ```bash
-cd backend
-python main.py
-# Or: uvicorn main:app --reload --host 0.0.0.0 --port 8000
+python test_upload.py path/to/image.jpg
 ```
 
-2. **Start Frontend** (in a new terminal): Run the React dev server (port 3000)
-```bash
-cd frontend
-npm install  # First time only
-npm run dev
-```
+## Requirements
 
-3. **Open Browser**: Navigate to `http://localhost:3000`
+See `requirements.txt` for Python dependencies.  
+See `frontend/package.json` for Node.js dependencies.
 
-### Step 4: Test Disease Detection
-
-#### Via Web Interface:
-- Click "Upload Image" to select a file, or
-- Click "Open Camera" to capture an image
-- Click "Detect Disease" to analyze the image
-- View results with confidence scores and top predictions
-
-#### Via API (Command Line):
-```bash
-python test_upload.py train/Tomato___healthy/0.JPG
-```
-
-#### Check API Health:
-```bash
-curl http://localhost:8000/health
-```
-
-### Motor Control
-
-- Use the directional buttons to control robot movement
-- Currently sends API requests (GPIO implementation pending)
-
-### Servo Control
-
-- Use Start/Stop buttons to control fertilizer dispensing
-- Currently sends API requests (GPIO implementation pending)
-
-## API Endpoints
-
-- `GET /` - API status
-- `GET /health` - Health check (shows model loading status)
-- `POST /api/detect-disease` - Detect disease from image
-  - Body: `multipart/form-data` with `file` field containing image
-  - Returns: JSON with disease name, confidence, and top predictions
-- `POST /api/motor/control?direction={direction}` - Control motors
-- `POST /api/servo/control?action={action}` - Control servo
-
-### Testing API with curl:
-```bash
-curl -X POST "http://localhost:8000/api/detect-disease" \
-  -F "file=@path/to/image.jpg"
-```
-
-## Future Implementation
-
-When Raspberry Pi is available:
-
-1. **GPIO Integration**: 
-   - Install `RPi.GPIO` or `gpiozero` library
-   - Implement motor control using GPIO pins
-   - Implement servo control using PWM
-
-2. **Pi Camera**:
-   - Replace desktop camera with Pi Camera module
-   - Use `picamera2` library for camera access
-
-3. **Production Deployment**:
-   - Build React app: `npm run build`
-   - Serve static files with FastAPI or nginx
-   - Set up systemd service for auto-start
-
-## Technologies Used
+## Technologies
 
 - **Backend**: FastAPI, TensorFlow, Keras, PIL
 - **Frontend**: React, Vite, Tailwind CSS, Axios
@@ -202,4 +148,3 @@ When Raspberry Pi is available:
 ## License
 
 MIT License
-
