@@ -50,8 +50,10 @@ app.add_middleware(
         "http://localhost:3000", 
         "http://localhost:5173", 
         "http://127.0.0.1:3000",
-        "http://10.222.54.41:3000",  # Pi's IP with port 3000
-        "http://10.222.54.41:5173",  # Pi's IP with port 5173
+        "http://10.222.54.41:3000",  # Old Pi's IP with port 3000
+        "http://10.222.54.41:5173",  # Old Pi's IP with port 5173
+        "http://10.86.141.41:3000",  # New Pi's IP with port 3000
+        "http://10.86.141.41:5173",  # New Pi's IP with port 5173
         "*"  # Allow all origins for development
     ],
     allow_credentials=True,
