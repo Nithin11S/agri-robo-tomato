@@ -252,14 +252,22 @@ async def detect_disease(file: UploadFile = File(...)):
         
         # Get disease name from mapping
         disease_name = class_mapping.get(predicted_class_idx, "Unknown")
-        formatted_disease = disease_name.replace("Tomato___", "").replace("_", " ").title()
+        # Format disease name (handle Not_A_Leaf and Tomato___ classes)
+        if disease_name == "Not_A_Leaf":
+            formatted_disease = "Not A Leaf"
+        else:
+            formatted_disease = disease_name.replace("Tomato___", "").replace("_", " ").title()
         
         # Get top 3 predictions
         top_predictions = []
         prediction_dict = {}
         for idx, prob in enumerate(predictions[0]):
             class_name = class_mapping.get(idx, "Unknown")
-            formatted_name = class_name.replace("Tomato___", "").replace("_", " ").title()
+            # Format class name (handle Not_A_Leaf and Tomato___ classes)
+            if class_name == "Not_A_Leaf":
+                formatted_name = "Not A Leaf"
+            else:
+                formatted_name = class_name.replace("Tomato___", "").replace("_", " ").title()
             prediction_dict[formatted_name] = float(prob * 100)
         
         sorted_predictions = sorted(prediction_dict.items(), key=lambda x: x[1], reverse=True)
@@ -298,7 +306,7 @@ async def motor_control(direction: str):
     Control robot motors (placeholder for future GPIO implementation)
     """
     valid_directions = ["front", "back", "left", "right", "stop"]
-    if direction.lower() not in valid_directions:
+    if direction.lthower() not in valid_directions:
         raise HTTPException(status_code=400, detail=f"Invalid direction. Must be one of: {valid_directions}")
     
     # TODO: Implement GPIO control when Raspberry Pi is available
