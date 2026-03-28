@@ -17,72 +17,110 @@ A web application for detecting tomato leaf diseases using AI, with robot contro
 
 ## Installation
 
-### Backend Setup
+Place these files in the project root before starting the backend:
 
-1. **Create virtual environment:**
-   ```bash
-   python -m venv backend/venv
-   ```
+- `tomato_disease_model.h5` or `tomato_disease_model_best.h5`
+- `class_mapping.json`
 
-2. **Activate virtual environment:**
-   ```bash
-   # Windows
-   backend\venv\Scripts\Activate.ps1
-   
-   # Linux/Mac
-   source backend/venv/bin/activate
-   ```
+### Windows
 
-3. **Install dependencies (in virtual environment, NOT globally):**
-   ```bash
-   # Make sure virtual environment is activated first!
-   pip install -r requirements.txt
-   ```
-   
-   **Important:** Always install in virtual environment, never globally!
-   
-   **Note:** If you encounter NumPy installation issues on Python 3.13:
-   ```bash
-   pip install --only-binary :all: numpy
-   pip install -r requirements.txt
-   ```
+#### Install Backend Dependencies
 
-4. **Place model files in project root:**
-   - `tomato_disease_model.h5` (or `tomato_disease_model_best.h5`)
-   - `class_mapping.json`
+```powershell
+cd "C:\path\to\tomato"
+python -m venv backend\venv
+.\backend\venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
 
-### Frontend Setup
+If PowerShell blocks activation, run this once in PowerShell and then try again:
 
-1. **Navigate to frontend directory:**
-   ```bash
-   cd frontend
-   ```
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
 
-2. **Install dependencies:**
-   ```bash
-   npm install
-   ```
+If you hit a NumPy install issue on Python 3.13:
+
+```powershell
+pip install --only-binary :all: numpy
+pip install -r requirements.txt
+```
+
+#### Install Frontend Dependencies
+
+```powershell
+cd "C:\path\to\tomato\frontend"
+npm install
+```
+
+### macOS
+
+#### Install Backend Dependencies
+
+```bash
+cd /path/to/tomato
+python3 -m venv backend/venv
+source backend/venv/bin/activate
+pip install -r requirements.txt
+```
+
+If `pip` points to the wrong Python, use:
+
+```bash
+python3 -m pip install -r requirements.txt
+```
+
+#### Install Frontend Dependencies
+
+```bash
+cd /path/to/tomato/frontend
+npm install
+```
 
 ## Running the Application
 
-### Start Backend Server
+### Windows
 
-```bash
-# Make sure virtual environment is activated
+#### Start Backend Server
+
+```powershell
+cd "C:\path\to\tomato"
+.\backend\venv\Scripts\Activate.ps1
 cd backend
 python main.py
 ```
 
-Backend runs on: `http://localhost:8000`  
-API docs: `http://localhost:8000/docs`
+#### Start Frontend Server
 
-### Start Frontend
+Open a new terminal:
 
-```bash
-cd frontend
+```powershell
+cd "C:\path\to\tomato\frontend"
 npm run dev
 ```
 
+### macOS
+
+#### Start Backend Server
+
+```bash
+cd /path/to/tomato
+source backend/venv/bin/activate
+cd backend
+python main.py
+```
+
+#### Start Frontend Server
+
+Open a new terminal:
+
+```bash
+cd /path/to/tomato/frontend
+npm run dev
+```
+
+Backend runs on: `http://localhost:8000`  
+API docs: `http://localhost:8000/docs`  
 Frontend runs on: `http://localhost:3000`
 
 For normal local development, only `npm run dev` is needed. No frontend build output folder is required unless you later choose to make a production build.
