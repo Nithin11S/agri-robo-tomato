@@ -328,13 +328,13 @@ def load_model_and_mapping():
             f"Model file not found. Checked:\n"
             f"  - {model_path_best}\n"
             f"  - {model_path}\n"
-            f"Please run cnn_train.py to generate the model."
+            f"Please place the trained model file in the project root."
         )
     
     if not os.path.exists(mapping_path):
         raise FileNotFoundError(
             f"Class mapping file not found: {mapping_path}\n"
-            f"Please run cnn_train.py to generate the class mapping."
+            f"Please place class_mapping.json in the project root."
         )
     
     print(f"TensorFlow version: {tf.__version__}")
@@ -417,7 +417,7 @@ async def detect_disease(file: UploadFile = File(...)):
     if model is None or class_mapping is None:
         raise HTTPException(
             status_code=503,
-            detail="Model not loaded. Please ensure model files (tomato_disease_model.h5 and class_mapping.json) are available in the project root. Run cnn_train.py to generate them."
+            detail="Model not loaded. Please ensure the trained model file and class_mapping.json are available in the project root."
         )
     
     # Validate file type

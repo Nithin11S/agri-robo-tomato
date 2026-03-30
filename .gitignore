@@ -34,7 +34,7 @@ yarn-error.log*
 # ============================================
 # Machine Learning Models (Large Files)
 # ============================================
-# Model files are large - teammates should train their own or download separately
+# Model files are large - teammates should download them separately
 *.h5
 *.hdf5
 *.pb
